@@ -5,6 +5,9 @@ SHELL = $(if $(wildcard $(SHELL_PATH)),/bin/ash,/bin/bash)
 run:
 	CGO_ENABLED=0 go run api/services/sales/main.go | CGO_ENABLED=0 go run api/tooling/logfmt/main.go
 
+run-help:
+	CGO_ENABLED=0 go run api/services/sales/main.go --help | CGO_ENABLED=0 go run api/tooling/logfmt/main.go
+
 # $ go install golang.org/dl/gotip@latest
 # $ gotip download
 
