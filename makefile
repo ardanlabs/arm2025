@@ -125,3 +125,22 @@ deps-cleancache:
 
 list:
 	go list -mod=mod all
+
+# ==============================================================================
+# Detect operating system and set the appropriate open command
+
+UNAME_S := $(shell uname -s)
+ifeq ($(UNAME_S),Darwin)
+	OPEN_CMD := open
+else
+	OPEN_CMD := xdg-open
+endif
+
+# ==============================================================================
+# Metrics and Tracing
+
+metrics-view:
+	expvarmon -ports="localhost:3010" -vars="build,requests,goroutines,errors,panics,mem:memstats.HeapAlloc,mem:memstats.HeapSys,mem:memstats.Sys"
+
+statsviz:
+	$(OPEN_CMD) http://localhost:3010/debug/statsviz
