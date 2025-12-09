@@ -14,6 +14,9 @@ run-help:
 run-gotip:
 	CGO_ENABLED=0 gotip run api/services/sales/main.go | CGO_ENABLED=0 gotip run api/tooling/logfmt/main.go
 
+curl-hack:
+	curl -i -X GET http:/localhost:3000/hack
+
 # ==============================================================================
 # Define dependencies
 
