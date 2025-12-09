@@ -2,25 +2,17 @@
 package mux
 
 import (
-	"encoding/json"
 	"net/http"
+
+	"github.com/ardanlabs/service/app/domain/hackapp"
+	"github.com/ardanlabs/service/foundation/web"
 )
 
 // WebAPI constructs a http.Handler with all application routes bound.
 func WebAPI() http.Handler {
-	mux := http.NewServeMux()
+	app := web.NewApp()
 
-	h := func(w http.ResponseWriter, r *http.Request) {
-		status := struct {
-			Status string
-		}{
-			Status: "OK",
-		}
+	hackapp.Routes(app)
 
-		json.NewEncoder(w).Encode(status)
-	}
-
-	mux.HandleFunc("GET /hack", h)
-
-	return mux
+	return app
 }

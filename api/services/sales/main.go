@@ -18,6 +18,14 @@ import (
 	"github.com/ardanlabs/service/foundation/logger"
 )
 
+/*
+	- Package Oriented Desgin
+		- Data Semantics on mux.WebAPI
+		- Interfaces
+		- Gorillas
+	- Shape the mux for App
+*/
+
 var build = "develop"
 
 func main() {
