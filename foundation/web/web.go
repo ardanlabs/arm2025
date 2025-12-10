@@ -1,7 +1,9 @@
 // Package web asd dasklj asldk.
 package web
 
-import "net/http"
+import (
+	"net/http"
+)
 
 type App struct {
 	*http.ServeMux

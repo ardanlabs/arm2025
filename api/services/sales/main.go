@@ -19,10 +19,9 @@ import (
 )
 
 /*
-	- Package Oriented Desgin
-		- Data Semantics on mux.WebAPI
-		- Interfaces
-		- Gorillas
+	- Finish the APP layer work on the web package
+	- Type Systems
+		- Weak and Strong Types
 	- Shape the mux for App
 */
 
