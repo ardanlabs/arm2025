@@ -2,16 +2,17 @@
 package hackapp
 
 import (
+	"context"
 	"encoding/json"
 	"net/http"
 )
 
-func hack(w http.ResponseWriter, r *http.Request) {
+func hack(ctx context.Context, w http.ResponseWriter, r *http.Request) error {
 	status := struct {
 		Status string
 	}{
 		Status: "OK",
 	}
 
-	json.NewEncoder(w).Encode(status)
+	return json.NewEncoder(w).Encode(status)
 }
