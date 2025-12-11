@@ -20,10 +20,10 @@ import (
 )
 
 /*
-	- Finish the APP layer work on the web package
-	- Type Systems
+	- Domain Driven, Data Oriented Design
 		- Weak and Strong Types
-	- Shape the mux for App
+	- Explore the Business Layer/Storage Layers
+		- Final Iterface Conversations
 */
 
 var build = "develop"
