@@ -19,6 +19,7 @@ func hack(ctx context.Context, w http.ResponseWriter, r *http.Request) web.Encod
 
 	if n := rand.Intn(100); n%2 == 0 {
 		return errs.Errorf(errs.InvalidArgument, "hack: %s[%s]", "param", "empty")
+		//panic("OOOOOH NOOOOOO")
 	}
 
 	status := status{
