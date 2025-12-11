@@ -6,16 +6,24 @@ import (
 	"net/http"
 )
 
-type HandlerFunc func(ctx context.Context, w http.ResponseWriter, r *http.Request) error
+type Logger func(ctx context.Context, msg string, args ...any)
+
+type Encoder interface {
+	Encode() (data []byte, contentType string, err error)
+}
+
+type HandlerFunc func(ctx context.Context, w http.ResponseWriter, r *http.Request) Encoder
 
 type App struct {
 	*http.ServeMux
-	mw []MidFunc
+	log Logger
+	mw  []MidFunc
 }
 
-func NewApp(mw ...MidFunc) *App {
+func NewApp(log Logger, mw ...MidFunc) *App {
 	return &App{
 		ServeMux: http.NewServeMux(),
+		log:      log,
 		mw:       mw,
 	}
 }
@@ -31,7 +39,11 @@ func (a *App) HandleFunc(pattern string, handlerFunc HandlerFunc, mw ...MidFunc)
 		// WE CAN DO WHAT WE WANT BEFORE
 		// INJECT FUNCTIONS
 
-		handlerFunc(ctx, w, r)
+		resp := handlerFunc(ctx, w, r)
+		if err := Respond(ctx, w, resp); err != nil {
+			a.log(ctx, "web", "ERROR", err)
+			return
+		}
 
 		// INJECT FUNCTIONS
 		// WE CAN DO WHAT WE WANT AFTER

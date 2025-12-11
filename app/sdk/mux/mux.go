@@ -12,7 +12,7 @@ import (
 
 // WebAPI constructs a http.Handler with all application routes bound.
 func WebAPI(log *logger.Logger) http.Handler {
-	app := web.NewApp(mid.Logger(log))
+	app := web.NewApp(log.Info, mid.Logger(log))
 
 	hackapp.Routes(app)
 
