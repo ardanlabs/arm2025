@@ -16,6 +16,7 @@ import (
 	"github.com/ardanlabs/kronk/cmd/kronk/website/app/sdk/debug"
 	"github.com/ardanlabs/service/app/sdk/mux"
 	"github.com/ardanlabs/service/foundation/logger"
+	"github.com/ardanlabs/service/foundation/web"
 )
 
 /*
@@ -36,11 +37,7 @@ func main() {
 		},
 	}
 
-	traceIDFn := func(ctx context.Context) string {
-		return ""
-	}
-
-	log = logger.NewWithEvents(os.Stdout, logger.LevelInfo, "SALES", traceIDFn, events)
+	log = logger.NewWithEvents(os.Stdout, logger.LevelInfo, "SALES", web.GetTraceID, events)
 
 	// -------------------------------------------------------------------------
 

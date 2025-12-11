@@ -4,6 +4,8 @@ package web
 import (
 	"context"
 	"net/http"
+
+	"github.com/google/uuid"
 )
 
 type Logger func(ctx context.Context, msg string, args ...any)
@@ -34,7 +36,7 @@ func (a *App) HandleFunc(pattern string, handlerFunc HandlerFunc, mw ...MidFunc)
 	handlerFunc = wrapMiddleware(a.mw, handlerFunc)
 
 	h := func(w http.ResponseWriter, r *http.Request) {
-		ctx := r.Context()
+		ctx := setTraceID(r.Context(), uuid.New())
 
 		// WE CAN DO WHAT WE WANT BEFORE
 		// INJECT FUNCTIONS
